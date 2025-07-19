@@ -1,0 +1,157 @@
+LLM 분석 중 오류 발생: Timeout of 600.0s exceeded, last exception: 503 failed to connect to all addresses; last error: UNAVAILABLE: ipv4:142.250.207.106:443: Failed to connect to remote host: Timeout occurred: FD shutdown
+  > 내용:  
+(Analyst)  
+   heeseok.lim@miraeasset.com         
+               
+ 
+293490  
+ 
+ 
+ 
+ 
+  
+  
+ 
+(
+)  
+   
+   
+ (24/2/8)  
+  33,000
+   29.7%   25,450
+  
+       
+ 
+ 
+KOSDAQ  826.58    
+ (
+ ) 2,100    
+ (
+ ) 83   
+  
+ (%) 11.8 
+ 
+ 
+Report summary  
+4Q23 Review: 
+  
+ 
+4
+  
+  2,390
+ (+1% YoY), 
+  140
+ (+57% YoY)
+  
+ (
+  2,440
+ , 
+ 130
+ )
+ 
+ . 
+  
+  
+ 
+  
+  
+  1,570
+ (+4% YoY)
+  
+ QoQ 15% 
+ . PC 
+  130
+ (+22% YoY)
+  QoQ 15% 
+  
+ POE 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+  
+ 
+  
+ . 
+ '
+', 
+  33,000
+  
+ 
+25F 16
+  
+ 
+  
+  
+  
+  
+  
+ . 
+, 
+ V 
+ 
+ 4
+  
+ 
+  
+  
+ 
+  
+  
+  
+ . 
+  
+ 
+ 
+  
+  
+ 25
+ 
+  
+  
+ 
+ 
+ 2
+. 
+  
+  
+ 
+  
+(
+ 
+, 
+  
+ 
+)
+ 
+  
+  
+ 
+  
+ 
+  
+  
+  
+  
+ . Equity Research  2024.2.13  
+Key data  
+Price performance   Earnings and valuation metrics  
+ 
+  
+ (12
+) 2021 2022 2023F  2024F  2025F  
+ (
+ ) 1,012  1,148  1,024  1,169  1,349  
+ (
+ ) 112 176 74 103 215 
+ (%) 11.1 15.3 7.2 8.8 15.9 
+ (
+ ) 529 -234 -245 44 132 
+EPS (
+ ) 7,061  -2,929  -2,967  536 1,597  
+ROE (%)  34.1 -12.4 -15.7 3.0 8.5 
+P/E (
+ ) 12.9 - - 47...
