@@ -11,8 +11,6 @@ from datetime import datetime
 from pykrx import stock
 
 # ✅ Gemini API configuration (하드코딩 방식)
-API_KEY = "AIzaSyA4vIEpJTIPtrzuC2JfRD-bM6_HbCOdE8k"
-
 genai.configure(api_key=API_KEY)
 model = genai.GenerativeModel("gemini-2.5-flash")
 
