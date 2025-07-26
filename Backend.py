@@ -11,7 +11,7 @@ from datetime import datetime
 from pykrx import stock
 
 # ✅ Gemini API configuration (하드코딩 방식)
-genai.configure(api_key=API_KEY)
+genai.configure(api_key='AIzaSyA4vIEpJTIPtrzuC2JfRD-bM6_HbCOdE8k')
 model = genai.GenerativeModel("gemini-2.5-flash")
 
 # ✅ Matplotlib 한글 폰트 설정
