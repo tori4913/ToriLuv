@@ -10,29 +10,10 @@ import pandas as pd
 from datetime import datetime
 from pykrx import stock
 
-# ✅ Gemini API configuration (보안 처리된 방식)
-API_KEY = None
-file_path = os.path.join(os.path.dirname(__file__), 'api_key.txt')
-
-try:
-    with open(file_path, 'r', encoding='utf-8') as f:
-        key = f.read().strip()
-        if key and key.startswith("AI"):
-            API_KEY = key
-            print("✅ API_KEY가 성공적으로 불러와졌습니다.")
-        else:
-            print("❌ API_KEY 형식이 올바르지 않습니다.")
-except FileNotFoundError:
-    print(f"❌ 오류: '{file_path}' 파일을 찾을 수 없습니다.")
-except Exception as e:
-    print(f"❌ 파일을 읽는 중 오류 발생: {e}")
-
-if API_KEY:
-    genai.configure(api_key=API_KEY)
-    model = genai.GenerativeModel("gemini-2.5-flash")
-else:
-    model = None
-    print("❌ 유효한 API_KEY가 없으므로 Gemini 모델이 설정되지 않았습니다.")
+# ✅ Gemini API configuration (하드코딩 방식)
+API_KEY = "AIzaSyA4vIEpJTIPtrzuC2JfRD-bM6_HbCOdE8k"
+genai.configure(api_key=API_KEY)
+model = genai.GenerativeModel("gemini-2.5-flash")
 
 # ✅ Matplotlib 한글 폰트 설정
 if platform.system() == 'Darwin':
@@ -45,7 +26,6 @@ else:
     except:
         plt.rcParams['font.family'] = 'DejaVu Sans'
 plt.rcParams['axes.unicode_minus'] = False
-
 
 # ✅ Company Info from pykrx
 TODAY = datetime.today().strftime("%Y%m%d")
