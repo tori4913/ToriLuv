@@ -12,7 +12,7 @@ from pykrx import stock
 
 # ✅ Gemini API configuration (보안 처리된 방식)
 API_KEY = None
-file_path = 'api_key.txt'
+file_path = os.path.join(os.path.dirname(__file__), 'api_key.txt')
 
 try:
     with open(file_path, 'r', encoding='utf-8') as f:
