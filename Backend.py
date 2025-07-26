@@ -10,6 +10,8 @@ import pandas as pd
 from datetime import datetime
 from pykrx import stock
 
+API_KEY = "AIzaSyA4vIEpJTIPtrzuC2JfRD-bM6_HbCOdE8k"  # 원래 키
+
 # ✅ Gemini API configuration
 file_path = 'api_key.txt'  # API 키가 저장된 텍스트 파일 경로
 
