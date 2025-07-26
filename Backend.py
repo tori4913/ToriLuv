@@ -110,7 +110,7 @@ def generate_price_distribution_data_and_plot(base_path, company_name_kor):
 # ✅ 전체 분석 실행 함수
 def run_analysis_from_user_input(user_input, base_path):
     if not model:
-        return {"error": "❌ Gemini 모델이 설정되지 않았습니다. API_KEY를 확인하세요."}, None
+        return {"error": "❌ Gemini 모델이 설정되지 않았습니다. API_KEY를 확인하세요!!"}, None
 
     company_name_kor = next((name for name in COMPANY_INFO if name in user_input), None)
     if not company_name_kor:
