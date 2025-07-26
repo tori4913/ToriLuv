@@ -29,7 +29,7 @@ if API_KEY:
     model = genai.GenerativeModel("gemini-2.5-flash")
 else:
     model = None
-    print("❌ 유효한 API_KEY가 없으므로 Gemini 모델이 설정되지 않았습니다.")
+    print("❌ 유효한 API_KEY가 없으므로 Gemini 모델이 설정되지 않았습니다!!!!!!!")
 
 # ✅ Matplotlib 한글 폰트 설정
 if platform.system() == 'Darwin':
