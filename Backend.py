@@ -11,47 +11,43 @@ from datetime import datetime
 from pykrx import stock
 
 # ✅ Gemini API configuration
-file_path = 'api_key.txt' # API 키가 저장된 텍스트 파일의 경로
-
-API_KEY = None # API_KEY 변수를 미리 None으로 초기화합니다.
+file_path = 'api_key.txt'  # API 키가 저장된 텍스트 파일 경로
 
 try:
     with open(file_path, 'r', encoding='utf-8') as f:
-        API_KEY = f.read().strip() # 파일 내용을 읽고, 앞뒤 공백(개행 문자 포함)을 제거하여 변수에 저장합니다.
-    print("API_KEY가 성공적으로 불러와졌습니다.")
-    # 필요하다면 아래 코드를 주석 해제하여 불러온 API_KEY를 확인하세요.
-    # print(f"불러온 API_KEY: {API_KEY}")
+        API_KEY = f.read().strip()
+    print("✅ API_KEY가 성공적으로 불러와졌습니다.")
 except FileNotFoundError:
-    print(f"오류: '{file_path}' 파일을 찾을 수 없습니다.")
-    print("API_KEY 변수에 값이 할당되지 않았습니다.")
+    API_KEY = None
+    print(f"❌ 오류: '{file_path}' 파일을 찾을 수 없습니다.")
 except Exception as e:
-    print(f"파일을 읽는 중 오류 발생: {e}")
-    print("API_KEY 변수에 값이 할당되지 않았습니다.")
-    
-genai.configure(api_key='API_KEY')
-model = genai.GenerativeModel("gemini-2.5-flash")
+    API_KEY = None
+    print(f"❌ 파일을 읽는 중 오류 발생: {e}")
+
+if API_KEY:
+    genai.configure(api_key=API_KEY)
+    model = genai.GenerativeModel("gemini-2.5-flash")
+else:
+    model = None
+    print("❌ 유효한 API_KEY가 없으므로 Gemini 모델이 설정되지 않았습니다.")
 
 # ✅ Matplotlib 한글 폰트 설정
 if platform.system() == 'Darwin':
     plt.rcParams['font.family'] = 'AppleGothic'
-    plt.rcParams['axes.unicode_minus'] = False
 elif platform.system() == 'Windows':
     plt.rcParams['font.family'] = 'Malgun Gothic'
-    plt.rcParams['axes.unicode_minus'] = False
 else:
     try:
         plt.rcParams['font.family'] = 'NanumGothic'
-        plt.rcParams['axes.unicode_minus'] = False
     except:
         plt.rcParams['font.family'] = 'DejaVu Sans'
-        plt.rcParams['axes.unicode_minus'] = False
+plt.rcParams['axes.unicode_minus'] = False
 
 # ✅ Company Info from pykrx
 TODAY = datetime.today().strftime("%Y%m%d")
 tickers = stock.get_market_ticker_list(date=TODAY, market="KOSPI")
 COMPANY_INFO = {
-    stock.get_market_ticker_name(ticker): {"ticker": f"{ticker}.KS"}
-    for ticker in tickers
+    stock.get_market_ticker_name(ticker): {"ticker": f"{ticker}.KS"} for ticker in tickers
 }
 
 # ✅ 주가 그래프 생성 함수
@@ -80,10 +76,9 @@ def generate_stock_price_graph(ticker, company_name_eng, period="5y"):
         img_base64 = base64.b64encode(buf.getvalue()).decode('utf-8')
         return img_base64, None
     except Exception as e:
-        return None, f"❌ 주가 그래프를 생성하는 중 오류가 발생했습니다: {e}"
+        return None, f"❌ 주가 그래프 생성 오류: {e}"
 
-# ✅ 가격 분포 시각화 + 데이터프레임 반환
-
+# ✅ 가격 분포 그래프 + 데이터프레임 반환 함수
 def generate_price_distribution_data_and_plot(base_path, company_name_kor):
     excel_path = os.path.join(base_path, company_name_kor, f"{company_name_kor}_report_text.xlsx")
     if not os.path.exists(excel_path):
@@ -92,7 +87,7 @@ def generate_price_distribution_data_and_plot(base_path, company_name_kor):
     try:
         df = pd.read_excel(excel_path)
         if not {'kapital', 'price'}.issubset(df.columns):
-            return None, None, "❌ 엑셀에 'kapital' 또는 'price' 컬럼이 존재하지 않습니다."
+            return None, None, "❌ 'kapital' 또는 'price' 컬럼이 존재하지 않습니다."
 
         df_result = df[['kapital', 'price']].copy()
 
@@ -110,17 +105,14 @@ def generate_price_distribution_data_and_plot(base_path, company_name_kor):
         img_base64 = base64.b64encode(buf.getvalue()).decode('utf-8')
         return df_result, img_base64, None
     except Exception as e:
-        return None, None, f"❌ 가격 분포 그래프 생성 중 오류 발생: {e}"
+        return None, None, f"❌ 가격 분포 그래프 생성 오류: {e}"
 
-# ✅ 분석 실행 함수
+# ✅ 전체 분석 실행 함수
 def run_analysis_from_user_input(user_input, base_path):
-    company_name_kor = None
+    if not model:
+        return {"error": "❌ Gemini 모델이 설정되지 않았습니다. API_KEY를 확인하세요."}, None
 
-    for name_kor in COMPANY_INFO.keys():
-        if name_kor in user_input:
-            company_name_kor = name_kor
-            break
-
+    company_name_kor = next((name for name in COMPANY_INFO if name in user_input), None)
     if not company_name_kor:
         return {"error": "❌ 질문에서 분석할 기업명을 찾을 수 없습니다."}, None
 
