@@ -10,28 +10,10 @@ import pandas as pd
 from datetime import datetime
 from pykrx import stock
 
-API_KEY = "AIzaSyA4vIEpJTIPtrzuC2JfRD-bM6_HbCOdE8k"  # 원래 키
-
-# ✅ Gemini API configuration
-file_path = 'api_key.txt'  # API 키가 저장된 텍스트 파일 경로
-
-try:
-    with open(file_path, 'r', encoding='utf-8') as f:
-        API_KEY = f.read().strip()
-    print("✅ API_KEY가 성공적으로 불러와졌습니다.")
-except FileNotFoundError:
-    API_KEY = None
-    print(f"❌ 오류: '{file_path}' 파일을 찾을 수 없습니다.")
-except Exception as e:
-    API_KEY = None
-    print(f"❌ 파일을 읽는 중 오류 발생: {e}")
-
-if API_KEY:
-    genai.configure(api_key=API_KEY)
-    model = genai.GenerativeModel("gemini-2.5-flash")
-else:
-    model = None
-    print("❌ 유효한 API_KEY가 없으므로 Gemini 모델이 설정되지 않았습니다!!!!!!!")
+# ✅ Gemini API configuration (직접 하드코딩)
+API_KEY = "AIzaSyA4vIEpJTIPtrzuC2JfRD-bM6_HbCOdE8k"
+genai.configure(api_key=API_KEY)
+model = genai.GenerativeModel("gemini-2.5-flash")
 
 # ✅ Matplotlib 한글 폰트 설정
 if platform.system() == 'Darwin':
